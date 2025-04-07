@@ -1,101 +1,110 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kirim Email</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap">
-    <link rel="stylesheet" href="style.css">
-    <link rel="icon" href="https://cloudkuimages.com/uploads/images/67e6501a1ea15.jpg" type="image/jpeg">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Kirim Email</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet"/>
+  <style>
+    /* Gaya yang sama seperti sebelumnya */
+    * {
+      margin: 0; padding: 0; box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      color: white;
+    }
+
+    .container {
+      background-color: rgba(0, 0, 0, 0.5);
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.3);
+      width: 100%;
+      max-width: 400px;
+      text-align: center;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border-radius: 10px;
+      border: none;
+      outline: none;
+      background-color: #1e1e1e;
+      color: white;
+    }
+
+    textarea {
+      height: 120px;
+    }
+
+    button {
+      background: linear-gradient(45deg, #4facfe, #00f2fe);
+      padding: 12px 30px;
+      border: none;
+      border-radius: 25px;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 15px;
+    }
+
+    button:hover {
+      transform: scale(1.05);
+      opacity: 0.9;
+    }
+
+    .footer {
+      margin-top: 20px;
+      font-size: 12px;
+      color: #aaa;
+    }
+
+    .footer a {
+      color: #00f2fe;
+      text-decoration: none;
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <div class="card">
-            <h2>📩 Kirim Email</h2>
-            <form id="emailForm">
-                <div class="form-group">
-                    <label for="to">Kepada</label>
-                    <input type="email" id="to" name="to" placeholder="Masukkan email penerima" required>
-                </div>
-                <div class="form-group">
-                    <label for="subject">Subjek</label>
-                    <input type="text" id="subject" name="subject" placeholder="Masukkan subjek email" required>
-                </div>
-                <div class="form-group">
-                    <label for="message">Pesan</label>
-                    <textarea id="message" name="message" placeholder="Tulis pesan Anda di sini..." required></textarea>
-                </div>
-                <button type="submit">
-                    <span id="buttonText">Kirim Email</span>
-                    <span id="buttonLoader" class="loader"></span>
-                </button>
-            </form>
-            <p id="statusMessage"></p>
-        </div>
-        <p style="text-align: center; margin-top: 20px;">Note: </p>
-        <p style="text-align: center;">Jika pesan tidak ada di bagian utama gmail kamu, maka mungkin pesan tersebut terkirim ke spam</p>
-        <img class="spam-img" src="https://files.catbox.moe/9py14p.jpg" alt="Spam_Email">
-        <div class="footer">
-            <p>Dibuat dengan ♥️ oleh <a href="https://github.com/LemonSync" target="_blank" rel="noopener noreferrer">Lemon</a></p>
-        </div>
+  <div class="container">
+    <h2>✉️ Kirim Email</h2>
+    <form id="emailForm">
+      <input type="email" id="to" placeholder="Masukkan email penerima" required />
+      <input type="text" id="subject" placeholder="Masukkan subjek email" required />
+      <textarea id="message" placeholder="Tulis pesan Anda di sini..." required></textarea>
+      <button type="submit">Kirim Email</button>
+    </form>
+    <div class="footer">
+      Dibuat dengan ❤️ oleh <a href="#">Bagus</a>
     </div>
+  </div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const emailForm = document.getElementById('emailForm');
-            const statusMessage = document.getElementById('statusMessage');
-            const buttonText = document.getElementById('buttonText');
-            const buttonLoader = document.getElementById('buttonLoader');
-            
-            emailForm.addEventListener('submit', async function(event) {
-                event.preventDefault();
-                
-                const formData = {
-                    to: document.getElementById('to').value,
-                    subject: document.getElementById('subject').value,
-                    message: document.getElementById('message').value
-                };
+  <script>
+    document.getElementById("emailForm").addEventListener("submit", async function (e) {
+      e.preventDefault();
+      const to = document.getElementById("to").value;
+      const subject = document.getElementById("subject").value;
+      const message = document.getElementById("message").value;
 
-                buttonText.textContent = "Mengirim...";
-                buttonLoader.style.display = "inline-block";
-                statusMessage.innerHTML = '<span class="loading"></span> Sedang mengirim email...';
-                statusMessage.style.color = "#4caf50";
-                emailForm.querySelector('button').disabled = true;
+      const response = await fetch('/api/send-email', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ to, subject, message })
+      });
 
-                try {
-                    const response = await fetch('/send-email', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(formData)
-                    });
-
-                    const result = await response.json();
-                    
-                    if (response.ok) {
-                        statusMessage.innerHTML = "✅ Email berhasil dikirim!\nEmail akan diterima penerima dalam 5 menit";
-                        statusMessage.style.color = "#4caf50";
-                        emailForm.reset();
-                        
-                        const card = document.querySelector('.card');
-                        card.classList.add('success-animation');
-                        setTimeout(() => {
-                            card.classList.remove('success-animation');
-                        }, 1000);
-                    } else {
-                        statusMessage.innerHTML = "❌ " + (result.message || "Gagal mengirim email");
-                        statusMessage.style.color = "#f44336";
-                    }
-                } catch (error) {
-                    statusMessage.innerHTML = "⚠️ Terjadi kesalahan jaringan!";
-                    statusMessage.style.color = "#f44336";
-                    console.error('Error:', error);
-                } finally {
-                    buttonText.textContent = "Kirim Email";
-                    buttonLoader.style.display = "none";
-                    emailForm.querySelector('button').disabled = false;
-                }
-            });
-        });
-    </script>
+      const result = await response.json();
+      alert(result.message || 'Gagal mengirim email!');
+    });
+  </script>
 </body>
 </html>
