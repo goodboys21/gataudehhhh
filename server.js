@@ -70,7 +70,7 @@ app.post('/send-email', async (req, res) => {
         margin-top: 30px;
         font-style: italic;
     ">
-        Dikirim melalui <b style="color: #00bfff;">🔔 Email Notification</b>
+        Dikirim melalui <b style="color: #00bfff;">Bagus Sender</b>
     </p>
 
     <div style="text-align: center; margin-top: 25px;">
@@ -92,7 +92,7 @@ app.post('/send-email', async (req, res) => {
     `;
 
     const mailOptions = {
-        from: `"Bagus Email Sender" <${process.env.EMAIL_USER}>`,
+        from: `"🔔 Bagus Message 🔔" <${process.env.EMAIL_USER}>`,
         to,
         subject,
         html: htmlContent
