@@ -74,7 +74,7 @@ app.post('/send-email', async (req, res) => {
     </p>
 
     <div style="text-align: center; margin-top: 25px;">
-        <a href="https://Bagus-email.vercel.app" style="
+        <a href="https://goodsite.vercel.app" style="
             background: linear-gradient(to right, #00bfff, #33ccff);
             color: #121212;
             text-decoration: none;
