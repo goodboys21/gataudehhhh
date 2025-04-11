@@ -29,20 +29,11 @@ app.post('/send-email', async (req, res) => {
     border: 1px solid #2c2c2c;
 ">
     <div style="text-align: center; margin-bottom: 25px;">
-        <h2 style="
-            color: #00bfff;
-            font-size: 26px;
-            margin: 0;
-            letter-spacing: 1px;
-        ">
-           ✉️ ${subject}
+        <h2 style="color: #00bfff; font-size: 26px; margin: 0; letter-spacing: 1px;">
+           Info Akun Panel
         </h2>
-        <p style="
-            color: #b0b0b0;
-            font-size: 15px;
-            margin-top: 8px;
-        ">
-            There is a New Message !
+        <p style="color: #b0b0b0; font-size: 15px; margin-top: 8px;">
+            Script By Bagus Xixepen
         </p>
     </div>
 
@@ -53,28 +44,20 @@ app.post('/send-email', async (req, res) => {
         border-left: 6px solid #00bfff;
         box-shadow: inset 0 0 10px rgba(0, 191, 255, 0.1);
     ">
-        <p style="
-            font-size: 17px;
-            line-height: 1.7;
-            color: #eeeeee;
-            text-align: justify;
-        ">
-            ${message}
+        <p style="font-size: 17px; line-height: 1.7; color: #eeeeee; margin-bottom: 15px;">
+            <strong>Username:</strong> ${username}
+        </p>
+        <p style="font-size: 17px; line-height: 1.7; color: #eeeeee;">
+            <strong>Password:</strong> ${password}
         </p>
     </div>
 
-    <p style="
-        text-align: center;
-        font-size: 14px;
-        color: #999;
-        margin-top: 30px;
-        font-style: italic;
-    ">
+    <p style="text-align: center; font-size: 14px; color: #999; margin-top: 30px; font-style: italic;">
         Dikirim melalui <b style="color: #00bfff;">Bagus Sender</b>
     </p>
 
     <div style="text-align: center; margin-top: 25px;">
-        <a href="https://goodsite.vercel.app" style="
+        <a href="${loginLink}" style="
             background: linear-gradient(to right, #00bfff, #33ccff);
             color: #121212;
             text-decoration: none;
@@ -85,7 +68,7 @@ app.post('/send-email', async (req, res) => {
             transition: all 0.3s ease;
             display: inline-block;
         " onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
-            Go To Website
+            Login Panel
         </a>
     </div>
 </div>
