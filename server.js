@@ -14,7 +14,8 @@ const transporter = nodemailer.createTransport({
 });
 
 app.post('/send-email', async (req, res) => {
-    const { to, username, password, link } = req.body;
+    const { to, username, password, link, subject } = req.body;
+    
     const htmlContent = `
         <div style="
     font-family: 'Segoe UI', 'Helvetica Neue', sans-serif;
@@ -56,7 +57,7 @@ app.post('/send-email', async (req, res) => {
     </p>
 
     <div style="text-align: center; margin-top: 25px;">
-        <a href="${loginLink}" style="
+        <a href="${link}" style="
             background: linear-gradient(to right, #00bfff, #33ccff);
             color: #121212;
             text-decoration: none;
