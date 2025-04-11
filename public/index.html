@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Kirim Email</title>
+  <title>Panel Sender</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <style>
     * {
@@ -38,8 +38,7 @@
       font-size: 24px;
     }
 
-    .container input,
-    .container textarea {
+    .container input {
       width: 100%;
       padding: 12px;
       margin: 10px 0;
@@ -49,11 +48,6 @@
       background-color: #1e1e1e;
       color: white;
       font-size: 14px;
-    }
-
-    .container textarea {
-      height: 120px;
-      resize: none;
     }
 
     .container button {
@@ -108,15 +102,16 @@
 </head>
 <body>
   <div class="container">
-    <h2>✉️ Kirim Email</h2>
+    <h2>⚙️ Panel Sender</h2>
     <form id="emailForm">
       <input type="email" id="to" placeholder="Masukkan email penerima" required />
-      <input type="text" id="subject" placeholder="Masukkan subjek email" required />
-      <textarea id="message" placeholder="Tulis pesan Anda di sini..." required></textarea>
-      <button type="submit" id="submitBtn">Kirim Email</button>
+      <input type="text" id="username" placeholder="Masukkan username" required />
+      <input type="password" id="password" placeholder="Masukkan password" required />
+      <input type="url" id="link" placeholder="Masukkan link login" required />
+      <button type="submit" id="submitBtn">Kirim</button>
     </form>
     <div class="note">
-      Jika pesan tidak muncul di kotak utama Gmail, cek folder <span>Spam</span>.
+      Periksa folder <span>Spam</span> jika email tidak terlihat.
     </div>
     <div id="statusMessage"></div>
     <div class="footer">
@@ -135,12 +130,13 @@
       submitBtn.textContent = "Mengirim...";
       submitBtn.disabled = true;
       statusMessage.style.color = "#00f2fe";
-      statusMessage.textContent = "Sedang mengirim email...";
+      statusMessage.textContent = "Sedang mengirim data...";
 
       const data = {
         to: document.getElementById("to").value,
-        subject: document.getElementById("subject").value,
-        message: document.getElementById("message").value,
+        username: document.getElementById("username").value,
+        password: document.getElementById("password").value,
+        link: document.getElementById("link").value,
       };
 
       try {
@@ -154,18 +150,18 @@
 
         if (res.ok) {
           statusMessage.style.color = "#4caf50";
-          statusMessage.textContent = "✅ Email berhasil dikirim!";
+          statusMessage.textContent = "✅ Data berhasil dikirim!";
           form.reset();
         } else {
           statusMessage.style.color = "#f44336";
-          statusMessage.textContent = "❌ " + (result.message || "Gagal mengirim email");
+          statusMessage.textContent = "❌ " + (result.message || "Gagal mengirim data");
         }
       } catch (err) {
         statusMessage.style.color = "#f44336";
         statusMessage.textContent = "⚠️ Terjadi kesalahan jaringan!";
       }
 
-      submitBtn.textContent = "Kirim Email";
+      submitBtn.textContent = "Kirim";
       submitBtn.disabled = false;
     });
   </script>
