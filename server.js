@@ -14,8 +14,7 @@ const transporter = nodemailer.createTransport({
 });
 
 app.post('/send-email', async (req, res) => {
-    const { to, subject, message } = req.body;
-
+    const { to, username, password, link } = req.body;
     const htmlContent = `
         <div style="
     font-family: 'Segoe UI', 'Helvetica Neue', sans-serif;
