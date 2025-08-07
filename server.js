@@ -17,62 +17,29 @@ app.post('/send-email', async (req, res) => {
     const { to, username, password, link, subject } = req.body;
     
     const htmlContent = `
-        <div style="
-    font-family: 'Segoe UI', 'Helvetica Neue', sans-serif;
-    max-width: 600px;
-    margin: auto;
-    padding: 30px;
-    border-radius: 16px;
-    background: linear-gradient(145deg, #1c1c1c, #121212);
-    color: #f0f0f0;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
-    border: 1px solid #2c2c2c;
-">
+  <div style="font-family: 'Poppins', sans-serif; background: linear-gradient(to top right, #1f2937, #111827); color: #f9fafb; padding: 30px; border-radius: 20px; max-width: 500px; margin: auto; border: 1px solid #374151;">
     <div style="text-align: center; margin-bottom: 25px;">
-        <h2 style="color: #00bfff; font-size: 26px; margin: 0; letter-spacing: 1px;">
-           Info Akun Panel
-        </h2>
-        <p style="color: #b0b0b0; font-size: 15px; margin-top: 8px;">
-            Script By Bagus Xixepen
-        </p>
+      <h2 style="font-size: 26px; font-weight: 600; color: #22d3ee; margin: 0;">Info Akun Panel</h2>
+      <p style="font-size: 12px; color: #9ca3af; margin-top: 6px;">Script by Bagus Xixepen</p>
     </div>
 
-    <div style="
-        background-color: #181818;
-        padding: 22px;
-        border-radius: 12px;
-        border-left: 6px solid #00bfff;
-        box-shadow: inset 0 0 10px rgba(0, 191, 255, 0.1);
-    ">
-        <p style="font-size: 17px; line-height: 1.7; color: #eeeeee; margin-bottom: 15px;">
-            <strong>Username:</strong> ${username}
-        </p>
-        <p style="font-size: 17px; line-height: 1.7; color: #eeeeee;">
-            <strong>Password:</strong> ${password}
-        </p>
+    <div style="background: #111827; padding: 20px; border-radius: 12px; border-left: 6px solid #22d3ee; margin-bottom: 20px;">
+      <p style="margin: 0; font-size: 16px;"><strong style="color: #22d3ee;">Username:</strong> ${username}</p>
     </div>
 
-    <p style="text-align: center; font-size: 14px; color: #999; margin-top: 30px; font-style: italic;">
-        Dikirim melalui <b style="color: #00bfff;">Bagus Sender</b>
-    </p>
-
-    <div style="text-align: center; margin-top: 25px;">
-        <a href="${link}" style="
-            background: linear-gradient(to right, #00bfff, #33ccff);
-            color: #121212;
-            text-decoration: none;
-            padding: 12px 25px;
-            border-radius: 30px;
-            font-size: 14px;
-            font-weight: bold;
-            transition: all 0.3s ease;
-            display: inline-block;
-        " onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
-            Login Panel
-        </a>
+    <div style="background: #111827; padding: 20px; border-radius: 12px; border-left: 6px solid #22d3ee; margin-bottom: 20px;">
+      <p style="margin: 0; font-size: 16px;"><strong style="color: #22d3ee;">Password:</strong> ${password}</p>
     </div>
-</div>
-    `;
+
+    <div style="text-align: center; margin: 30px 0;">
+      <a href="${link}" style="background: linear-gradient(to right, #22d3ee, #3b82f6); color: #111827; text-decoration: none; padding: 12px 24px; border-radius: 30px; font-weight: 600; display: inline-block;">
+        Login Panel
+      </a>
+    </div>
+
+    <p style="text-align: center; font-size: 12px; color: #9ca3af; font-style: italic;">Dikirim melalui <b style="color: #22d3ee;">Bagus Sender</b></p>
+  </div>
+`;
 
     const mailOptions = {
         from: `"🔔 Bagus Message 🔔" <${process.env.EMAIL_USER}>`,
